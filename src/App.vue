@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <FormComponent />
+    <FormComponent :screenWidth="screenWidth" />
   </div>
 </template>
 
@@ -11,6 +11,22 @@ export default {
   name: "App",
   components: {
     FormComponent,
+  },
+  data() {
+    return {
+      screenWidth: window.innerWidth,
+    };
+  },
+  mounted() {
+    window.addEventListener("resize", this.handleResize);
+  },
+  beforeDestroy() {
+    window.removeEventListener("resize", this.handleResize);
+  },
+  methods: {
+    handleResize() {
+      this.screenWidth = window.innerWidth;
+    },
   },
 };
 </script>

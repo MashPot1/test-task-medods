@@ -103,6 +103,7 @@
 import { required } from "@vuelidate/validators";
 
 export default {
+  props: ["screenWidth"],
   data() {
     return {
       surname: "",
@@ -129,7 +130,6 @@ export default {
         dateOfIssue: "",
       },
       noSMS: false,
-      screenWidth: window.innerWidth,
     };
   },
   validations: {
@@ -141,19 +141,10 @@ export default {
     document: { type: { required }, dateOfIssue: { required } },
   },
 
-  mounted() {
-    window.addEventListener("resize", this.handleResize);
-  },
-  beforeDestroy() {
-    window.removeEventListener("resize", this.handleResize);
-  },
   methods: {
     submitForm() {
       alert("Форма успешно отправлена! Данные: " + JSON.stringify(this.$data));
       console.log("Данные формы:", this.$data);
-    },
-    handleResize() {
-      this.screenWidth = window.innerWidth;
     },
   },
 };
